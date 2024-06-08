@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitHub Dependency Submission",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "integer",
+      "description": "The version of the snapshot format."
+    },
+    "sha": {
+      "type": "string",
+      "description": "The commit SHA for which the snapshot applies."
+    },
+    "ref": {
+      "type": "string",
+      "description": "The Git reference for which the snapshot applies."
+    },
+    "job": {
+      "type": "string",
+      "description": "A unique identifier for the job run."
+    },
+    "detector": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tool used to detect the dependencies."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the tool."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the tool's documentation."
+        }
+      },
+      "required": ["name", "version", "url"]
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "scan_id": {
+          "type": "string",
+          "description": "An identifier for the scan."
+        },
+        "scanner": {
+          "type": "object",
+          "description": "Information about the scanner."
+        },
+        "environment": {
+          "type": "object",
+          "description": "Information about the environment."
+        },
+        "job": {
+          "type": "object",
+          "description": "Information about the job."
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "An array of dependency objects.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "The reference to the dependency."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional information about the dependency."
+          }
+        },
+        "required": ["ref"]
+      }
+    }
+  },
+  "required": ["version", "sha", "ref", "job", "detector", "dependencies"]
+}
